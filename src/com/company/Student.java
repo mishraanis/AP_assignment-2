@@ -27,25 +27,47 @@ public class Student implements User{
 
     @Override
     public void viewLec_material(LinkedList<Lecture_material> lecture_contents) {
-        for(Lecture_material lec:lecture_contents)
+        for(Lecture_material lec:lecture_contents) {
             lec.displayContent();
+            System.out.println("");
+        }
     }
 
     @Override
     public void viewAssessment(LinkedList<Assessment> assessments) {
         for(int i=0; i<assessments.size(); i++){
-            System.out.print("ID: " + i + " ");
-            assessments.get(i).displayContent();
+            if(!assessments.get(i).getIsClosed())
+            {
+                System.out.print("ID: " + i + " ");
+                assessments.get(i).displayContent();
+                System.out.println("----------------");
+            }
         }
     }
 
     @Override
-    public void viewComments(LinkedList<Comments> comments) {
-
+    public void addComments(LinkedList<Comments> comments, Comments comment) {
+        comments.add(comment);
     }
 
     @Override
-    public void addComments(Comments comment) {
-
+    public void viewComments(LinkedList<Comments> comments) {
+        for(Comments comment: comments)
+        {
+            System.out.println(comment.getContent() + " - " + comment.getMadeBy());
+            System.out.println(comment.getDate());
+        }
     }
+
+    public void addAssessment(Assessment assessment)
+    {
+        map.put(assessment, null);
+    }
+
+    public void submitAssessment(Assessment assessment, Submission sub)
+    {
+        map.replace(assessment, sub);
+    }
+
+    public
 }

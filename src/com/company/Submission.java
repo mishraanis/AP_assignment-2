@@ -9,18 +9,13 @@ public class Submission {
     {
         this.fileName = filename;
         this.isGraded = false;
-        instructor_name = "";
+        this.instructor_name = "";
+        this.marks = -1;
     }
-    public void setGraded()
+    public void setGraded(int marks, String instructor_name)
     {
         isGraded = true;
-    }
-    public void setMarks(int marks)
-    {
         this.marks = marks;
-    }
-    public void setInstructor_name(String inst_name)
-    {
-        this.instructor_name = inst_name;
+        this.instructor_name = instructor_name;
     }
 }

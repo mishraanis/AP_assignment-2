@@ -12,6 +12,26 @@ public class Assignment implements Assessment{
     }
 
     @Override
+    public String getProblem_Question() {
+        return prob_statement;
+    }
+
+    @Override
+    public int getMaxMarks() {
+        return max_marks;
+    }
+
+    @Override
+    public boolean getIsClosed() {
+        return isClosed;
+    }
+
+    @Override
+    public void setIsClosed(boolean val) {
+        this.isClosed = val;
+    }
+
+    @Override
     public void displayContent() {
         System.out.println("Assignment: " + prob_statement + " Max Marks: " + max_marks);
     }

@@ -30,19 +30,41 @@ public class Course {
     }
     void addLecture(Lecture_material content, Instructor inst)
     {
-        inst.addMaterial(lecture_contents, content);
+        inst.addLec_Material(lecture_contents, content);
     }
     void showLectures(User user)
     {
         user.viewLec_material(lecture_contents);
     }
+    void addAssessment(Instructor instructor, Assessment assessment)
+    {
+        instructor.uploadAssessment(assessments, assessment);
+        for(Student student: students)
+        {
+            student.addAssessment(assessment);
+        }
+    }
     void showAssessments(User user)
     {
         user.viewAssessment(assessments);
+    }
+    void submitAssessment(Student student, Assessment assmnt, Submission sub)
+    {
+        student.submitAssessment(assmnt, sub);
+    }
+    void gradeAssessment(Instructor instructor, Student student, )
+    void addComment(User user, Comments comment)
+    {
+        user.addComments(comments, comment);
     }
     void showComments(User user)
     {
         user.viewComments(comments);
     }
-    void GradeAssessment(Instructor instructor)
+//    void GradeAssessment(Instructor instructor)
+
+    void CloseAssessment(Instructor instructor, Assessment assessment)
+    {
+        instructor.closeAssessment(assessments, assessment);
+    }
 }

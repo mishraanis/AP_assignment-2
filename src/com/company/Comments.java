@@ -12,4 +12,16 @@ public class Comments {
         this.madeBy = madeBy;
         date = java.util.Calendar.getInstance().getTime();
     }
+    public String getContent()
+    {
+        return content;
+    }
+    public String getMadeBy()
+    {
+        return madeBy;
+    }
+    public Date getDate()
+    {
+        return date;
+    }
 }
