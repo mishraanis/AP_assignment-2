@@ -3,19 +3,20 @@ package com.company;
 import java.util.LinkedList;
 
 public class Course {
-    private LinkedList<Instructor> instructors;
-    private LinkedList<Student> students;
-    private LinkedList<Lecture_material> lecture_contents;
-    private LinkedList<Assessment> assessments;
-    private LinkedList<Comments> comments;
+    private final LinkedList<Instructor> instructors;
+    private final LinkedList<Student> students;
+    private final LinkedList<Lecture_material> lecture_contents;
+    private final LinkedList<Assessment> assessments;
+    private final LinkedList<Comments> comments;
     Course()
     {
         instructors = new LinkedList<>();
         students = new LinkedList<>();
         lecture_contents = new LinkedList<>();
         comments = new LinkedList<>();
+        assessments = new LinkedList<>();
     }
-    void Initialise()
+    public void Initialise()
     {
         Student S0 = new Student("S0");
         Student S1 = new Student("S1");
@@ -28,9 +29,19 @@ public class Course {
         instructors.add(I0);
         instructors.add(I1);
     }
-    void addLecture(Lecture_material content, Instructor inst)
+
+    public LinkedList<Instructor> getInstructors() {
+        return instructors;
+    }
+    public LinkedList<Student> getStudents() {
+        return students;
+    }
+    public LinkedList<Assessment> getAssessments() {
+        return assessments;
+    }
+    void addLecture(Lecture_material content, Instructor instructor)
     {
-        inst.addLec_Material(lecture_contents, content);
+        instructor.addLec_Material(lecture_contents, content);
     }
     void showLectures(User user)
     {
@@ -39,20 +50,37 @@ public class Course {
     void addAssessment(Instructor instructor, Assessment assessment)
     {
         instructor.uploadAssessment(assessments, assessment);
-        for(Student student: students)
+    }
+    boolean showAssessments(User user, int param)
+    {
+        return user.viewAssessment(assessments, param);
+    }
+    void submitAssessment(Student student, Assessment assessment, Submission sub)
+    {
+        student.submitAssessment(assessment, sub);
+    }
+    boolean showStudents_with_Assessment(Assessment assessment)
+    {
+        boolean found = false;
+        for(int i=0; i<students.size(); i++)
         {
-            student.addAssessment(assessment);
+            Student student = students.get(i);
+            if(student.getMap().containsKey(assessment))
+            {
+                System.out.println(i + ". " + student.getID());
+                found = true;
+            }
         }
+        return found;
     }
-    void showAssessments(User user)
+    void gradeAssessment(Instructor instructor, Student student, Assessment assessment, int marks)
     {
-        user.viewAssessment(assessments);
+        student.Assigning_grade(instructor, assessment, marks);
     }
-    void submitAssessment(Student student, Assessment assmnt, Submission sub)
+    void viewGrades(Student student)
     {
-        student.submitAssessment(assmnt, sub);
+        student.viewGrades();
     }
-    void gradeAssessment(Instructor instructor, Student student, )
     void addComment(User user, Comments comment)
     {
         user.addComments(comments, comment);
@@ -61,7 +89,6 @@ public class Course {
     {
         user.viewComments(comments);
     }
-//    void GradeAssessment(Instructor instructor)
 
     void CloseAssessment(Instructor instructor, Assessment assessment)
     {

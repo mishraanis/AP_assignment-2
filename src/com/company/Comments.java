@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Comments {
     private final String content;
-    private String madeBy;
+    private final String madeBy;
     Date date;
     Comments(String content, String madeBy)
     {

@@ -1,21 +1,38 @@
 package com.company;
 
 public class Submission {
-    private String fileName;
+    private final String stu_ans;
     private boolean isGraded;
     private int marks;
-    private String instructor_name;
-    Submission(String filename)
+    private Instructor instructor;
+    Submission(String stu_ans)
     {
-        this.fileName = filename;
+        this.stu_ans = stu_ans;
         this.isGraded = false;
-        this.instructor_name = "";
+        this.instructor = null;
         this.marks = -1;
     }
-    public void setGraded(int marks, String instructor_name)
+
+    public String getStu_ans() {
+        return stu_ans;
+    }
+
+    public boolean isGraded() {
+        return isGraded;
+    }
+
+    public int getMarks() {
+        return marks;
+    }
+
+    public Instructor getInstructor() {
+        return instructor;
+    }
+
+    public void setGraded(int marks, Instructor instructor)
     {
         isGraded = true;
         this.marks = marks;
-        this.instructor_name = instructor_name;
+        this.instructor = instructor;
     }
 }

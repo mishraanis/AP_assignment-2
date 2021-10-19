@@ -41,12 +41,4 @@ public class Slide implements Lecture_material{
     public String getInst_name() {
         return instructor_name;
     }
-
-    public int getNum_slides() {
-        return num_slides;
-    }
-
-    public String[] getContent() {
-        return content;
-    }
 }

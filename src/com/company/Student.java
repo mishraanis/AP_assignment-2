@@ -2,14 +2,15 @@ package com.company;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 public class Student implements User{
     private final String ID;
-    private HashMap<Assessment, Submission> map;
+    private final HashMap<Assessment, Submission> map;
     Student(String ID)
     {
         this.ID = ID;
-        map = new HashMap<Assessment, Submission>();
+        map = new HashMap<>();
     }
 
     @Override
@@ -26,22 +27,72 @@ public class Student implements User{
     }
 
     @Override
+    public String getID() {
+        return ID;
+    }
+
+    @Override
     public void viewLec_material(LinkedList<Lecture_material> lecture_contents) {
         for(Lecture_material lec:lecture_contents) {
             lec.displayContent();
-            System.out.println("");
+            System.out.println();
         }
     }
 
     @Override
-    public void viewAssessment(LinkedList<Assessment> assessments) {
-        for(int i=0; i<assessments.size(); i++){
-            if(!assessments.get(i).getIsClosed())
+    public boolean viewAssessment(LinkedList<Assessment> assessments, int param) {
+        if(param==0)
+        {
+            boolean found = false;
+            System.out.println("Open Assessments");
+            for (int i = 0; i < assessments.size(); i++)
+            {
+                if (!assessments.get(i).getIsClosed())
+                {
+                    System.out.print("ID: " + i + " ");
+                    assessments.get(i).displayContent();
+                    System.out.println("----------------");
+                    found = true;
+                }
+            }
+            System.out.println("Closed Assessments");
+            for (int i = 0; i < assessments.size(); i++)
+            {
+                if (assessments.get(i).getIsClosed())
+                {
+                    System.out.print("ID: " + i + " ");
+                    assessments.get(i).displayContent();
+                    System.out.println("----------------");
+                    found = true;
+                }
+            }
+            System.out.println();
+            return found;
+        }
+        else if(param==1)
+        {
+            for(int i=0; i<assessments.size(); i++)
             {
                 System.out.print("ID: " + i + " ");
                 assessments.get(i).displayContent();
                 System.out.println("----------------");
             }
+            return true;
+        }
+        else
+        {
+            boolean found = false;
+            for (int i = 0; i < assessments.size(); i++)
+            {
+                if(!assessments.get(i).getIsClosed() && !map.containsKey(assessments.get(i)))
+                {
+                    System.out.print("ID: " + i + " ");
+                    assessments.get(i).displayContent();
+                    System.out.println("----------------");
+                    found = true;
+                }
+            }
+            return found;
         }
     }
 
@@ -56,18 +107,53 @@ public class Student implements User{
         {
             System.out.println(comment.getContent() + " - " + comment.getMadeBy());
             System.out.println(comment.getDate());
+            System.out.println();
         }
-    }
-
-    public void addAssessment(Assessment assessment)
-    {
-        map.put(assessment, null);
     }
 
     public void submitAssessment(Assessment assessment, Submission sub)
     {
-        map.replace(assessment, sub);
+        map.put(assessment, sub);
     }
 
-    public
+    public HashMap<Assessment, Submission> getMap() {
+        return map;
+    }
+
+    public void Assigning_grade(Instructor instructor, Assessment assessment, int marks)
+    {
+        Submission submission = map.get(assessment);
+        submission.setGraded(marks, instructor);
+    }
+
+    public void viewGrades()
+    {
+        LinkedList<Submission> graded = new LinkedList<>();
+        LinkedList<Submission> ungraded = new LinkedList<>();
+
+        for(Map.Entry<Assessment, Submission> m : map.entrySet())
+        {
+            Submission sub = m.getValue();
+            if(sub.isGraded())
+                graded.add(sub);
+            else
+                ungraded.add(sub);
+        }
+        System.out.println("Graded submissions");
+        for(Submission subs: graded)
+        {
+            System.out.println("Submission: " + subs.getStu_ans());
+            System.out.println("Marks scored: " + subs.getMarks());
+            System.out.println("Graded by: " + subs.getInstructor().getID());
+            System.out.println();
+        }
+        System.out.println("----------------------------");
+        System.out.println("Ungraded submissions");
+        for(Submission subs: ungraded)
+        {
+            System.out.println("Submission: " + subs.getStu_ans());
+        }
+        System.out.println("----------------------------");
+        System.out.println();
+    }
 }

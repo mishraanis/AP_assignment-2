@@ -37,8 +37,4 @@ public class Video implements Lecture_material {
     public String getInst_name() {
         return inst_name;
     }
-
-    public String getVid_file() {
-        return vid_file;
-    }
 }

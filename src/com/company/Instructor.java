@@ -10,6 +10,11 @@ public class Instructor implements User{
     }
 
     @Override
+    public String getID() {
+        return ID;
+    }
+
+    @Override
     public void showMenu() {
         System.out.println("""
                 INSTRUCTOR MENU
@@ -43,14 +48,60 @@ public class Instructor implements User{
     }
 
     @Override
-    public void viewAssessment(LinkedList<Assessment> assessments) {
-        for(int i=0; i<assessments.size(); i++){
-            if(!assessments.get(i).getIsClosed())
-            {
-                System.out.print("ID: " + i + " ");
-                assessments.get(i).displayContent();
-                System.out.println("----------------");
+    public boolean viewAssessment(LinkedList<Assessment> assessments, int param)
+    {
+        if(param==0)
+        {
+            boolean found = false;
+            System.out.println("Open Assessments");
+            for (int i = 0; i < assessments.size(); i++) {
+                if (!assessments.get(i).getIsClosed()) {
+                    System.out.print("ID: " + i + " ");
+                    assessments.get(i).displayContent();
+                    System.out.println("----------------");
+                    found = true;
+                }
             }
+            System.out.println("Closed Assessments");
+            for (int i = 0; i < assessments.size(); i++) {
+                if (assessments.get(i).getIsClosed()) {
+                    System.out.print("ID: " + i + " ");
+                    assessments.get(i).displayContent();
+                    System.out.println("----------------");
+                    found = true;
+                }
+            }
+            return found;
+        }
+        else if(param==1)
+        {
+            if(assessments.size()>0)
+            {
+                System.out.println("List of Assessments");
+                for (int i = 0; i < assessments.size(); i++) {
+                    System.out.print("ID: " + i + " ");
+                    assessments.get(i).displayContent();
+                    System.out.println("----------------");
+                }
+                return true;
+            }
+            else
+                return false;
+        }
+        else
+        {
+            boolean found = false;
+            for (int i = 0; i < assessments.size(); i++)
+            {
+                if (!assessments.get(i).getIsClosed())
+                {
+                    System.out.print("ID: " + i + " ");
+                    assessments.get(i).displayContent();
+                    System.out.println("----------------");
+                    found = true;
+                }
+            }
+            return found;
         }
     }
 
@@ -60,7 +111,8 @@ public class Instructor implements User{
     }
 
     @Override
-    public void viewComments(LinkedList<Comments> comments) {
+    public void viewComments(LinkedList<Comments> comments)
+    {
         for(Comments comment: comments)
         {
             System.out.println(comment.getContent() + " - " + comment.getMadeBy());
@@ -72,14 +124,9 @@ public class Instructor implements User{
     {
         for(Assessment assmnt: assessments)
         {
-            if(assmnt == assessment && !assmnt.getIsClosed())
+            if(assmnt == assessment)
             {
                 assmnt.setIsClosed(true);
-                break;
-            }
-            else if(assmnt == assessment && assmnt.getIsClosed())
-            {
-                System.out.println("Assignment has been closed already");
                 break;
             }
         }
