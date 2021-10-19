@@ -137,7 +137,7 @@ public class Main {
                                     break;
                                 else
                                 {
-                                    System.out.println("Enter valid marks within the range: 0 to" + assessment.getMaxMarks());
+                                    System.out.println("Enter valid marks within the range: 0 to " + assessment.getMaxMarks());
                                     marks = sc.nextInt();
                                 }
                             }
