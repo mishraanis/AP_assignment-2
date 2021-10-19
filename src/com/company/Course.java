@@ -33,39 +33,47 @@ public class Course {
     public LinkedList<Instructor> getInstructors() {
         return instructors;
     }
+
     public LinkedList<Student> getStudents() {
         return students;
     }
+
     public LinkedList<Assessment> getAssessments() {
         return assessments;
     }
+
     void addLecture(Lecture_material content, Instructor instructor)
     {
         instructor.addLec_Material(lecture_contents, content);
     }
+
     void showLectures(User user)
     {
         user.viewLec_material(lecture_contents);
     }
+
     void addAssessment(Instructor instructor, Assessment assessment)
     {
         instructor.uploadAssessment(assessments, assessment);
     }
+
     boolean showAssessments(User user, int param)
     {
         return user.viewAssessment(assessments, param);
     }
+
     void submitAssessment(Student student, Assessment assessment, Submission sub)
     {
         student.submitAssessment(assessment, sub);
     }
+
     boolean showStudents_with_Assessment(Assessment assessment)
     {
         boolean found = false;
         for(int i=0; i<students.size(); i++)
         {
             Student student = students.get(i);
-            if(student.getMap().containsKey(assessment))
+            if(student.getMap().containsKey(assessment) && !student.getMap().get(assessment).isGraded())
             {
                 System.out.println(i + ". " + student.getID());
                 found = true;
@@ -73,18 +81,22 @@ public class Course {
         }
         return found;
     }
+
     void gradeAssessment(Instructor instructor, Student student, Assessment assessment, int marks)
     {
-        student.Assigning_grade(instructor, assessment, marks);
+        instructor.Assigning_grade(student, assessment, marks);
     }
+
     void viewGrades(Student student)
     {
         student.viewGrades();
     }
+
     void addComment(User user, Comments comment)
     {
         user.addComments(comments, comment);
     }
+
     void showComments(User user)
     {
         user.viewComments(comments);

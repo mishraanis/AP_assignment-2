@@ -81,7 +81,7 @@ public class Main {
                     {
                         System.out.print("Enter problem statement: ");
                         String prob_statement = br.readLine();
-                        System.out.println("Enter max marks: ");
+                        System.out.print("Enter max marks: ");
                         int max_marks = sc.nextInt();
                         Assignment assignment = new Assignment(prob_statement, max_marks);
                         course.addAssessment(curr_instructor, assignment);

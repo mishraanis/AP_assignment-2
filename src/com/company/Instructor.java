@@ -111,8 +111,7 @@ public class Instructor implements User{
     }
 
     @Override
-    public void viewComments(LinkedList<Comments> comments)
-    {
+    public void viewComments(LinkedList<Comments> comments){
         for(Comments comment: comments)
         {
             System.out.println(comment.getContent() + " - " + comment.getMadeBy());
@@ -120,8 +119,7 @@ public class Instructor implements User{
         }
     }
 
-    public void closeAssessment(LinkedList<Assessment> assessments, Assessment assessment)
-    {
+    public void closeAssessment(LinkedList<Assessment> assessments, Assessment assessment){
         for(Assessment assmnt: assessments)
         {
             if(assmnt == assessment)
@@ -130,6 +128,11 @@ public class Instructor implements User{
                 break;
             }
         }
+    }
+
+    public void Assigning_grade(Student student, Assessment assessment, int marks){
+        Submission submission = student.getMap().get(assessment);
+        submission.setGraded(marks, this);
     }
 
 }

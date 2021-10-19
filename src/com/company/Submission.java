@@ -29,8 +29,7 @@ public class Submission {
         return instructor;
     }
 
-    public void setGraded(int marks, Instructor instructor)
-    {
+    public void setGraded(int marks, Instructor instructor) {
         isGraded = true;
         this.marks = marks;
         this.instructor = instructor;

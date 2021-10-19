@@ -126,12 +126,6 @@ public class Student implements User{
         return map;
     }
 
-    public void Assigning_grade(Instructor instructor, Assessment assessment, int marks)
-    {
-        Submission submission = map.get(assessment);
-        submission.setGraded(marks, instructor);
-    }
-
     public void viewGrades()
     {
         LinkedList<Submission> graded = new LinkedList<>();
