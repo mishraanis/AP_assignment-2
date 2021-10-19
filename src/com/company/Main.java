@@ -131,6 +131,16 @@ public class Main {
                             System.out.println(assessment.getMaxMarks());
                             System.out.print("Marks scored: ");
                             int marks = sc.nextInt();
+                            while(true)
+                            {
+                                if(marks <= assessment.getMaxMarks() && marks>=0)
+                                    break;
+                                else
+                                {
+                                    System.out.println("Enter valid marks within the range: 0 to" + assessment.getMaxMarks());
+                                    marks = sc.nextInt();
+                                }
+                            }
                             course.gradeAssessment(curr_instructor, student, assessment, marks);
                         }
                     }

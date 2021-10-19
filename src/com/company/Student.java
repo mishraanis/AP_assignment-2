@@ -44,7 +44,7 @@ public class Student implements User{
         if(param==0)
         {
             boolean found = false;
-            System.out.println("Open Assessments");
+            System.out.println("Open Assessments:");
             for (int i = 0; i < assessments.size(); i++)
             {
                 if (!assessments.get(i).getIsClosed())
@@ -55,7 +55,8 @@ public class Student implements User{
                     found = true;
                 }
             }
-            System.out.println("Closed Assessments");
+            System.out.println("Closed Assessments:");
+            boolean isAnythingPresent = false;
             for (int i = 0; i < assessments.size(); i++)
             {
                 if (assessments.get(i).getIsClosed())
@@ -64,7 +65,12 @@ public class Student implements User{
                     assessments.get(i).displayContent();
                     System.out.println("----------------");
                     found = true;
+                    isAnythingPresent = true;
                 }
+            }
+            if(!isAnythingPresent)
+            {
+                System.out.println("No Assignments present under this section");
             }
             System.out.println();
             return found;
